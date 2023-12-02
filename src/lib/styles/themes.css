@@ -1,0 +1,33 @@
+@layer base {
+  :root {
+    color-scheme: light;
+    --brightness-active: 0.9;
+    --brightness-hover: 1.1;
+    --color-surface: 255 255 255;
+    --color-surface-accent: 250 250 250;
+    --color-surface-font: 65 84 98;
+    --color-primary: 16 149 193;
+    --color-primary-font: 255 255 255;
+    --color-secondary: 89 107 120;
+    --color-secondary-font: 255 255 255;
+    --color-tertiary: 27 40 50;
+    --color-tertiary-font: 255 255 255;
+    --color-success: 76 158 80;
+    --color-success-font: 255 255 255;
+    --color-warning: 199 93 41;
+    --color-warning-font: 255 255 255;
+    --color-error: 198 40 40;
+    --color-error-font: 255 255 255;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      color-scheme: dark;
+      --color-surface: 17 25 31;
+      --color-surface-accent: 20 30 38;
+      --color-surface-font: 187 198 206;
+      --color-tertiary: 237 240 243;
+      --color-tertiary-font: 0 0 0;
+    }
+  }
+}

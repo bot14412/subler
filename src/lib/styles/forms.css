@@ -1,0 +1,38 @@
+@layer components {
+  .checkbox {
+    @apply w-6 h-6 text-primary cursor-pointer border bg-surface border-surface-font/25 rounded checked:border-primary;
+  }
+
+  .checkbox:focus {
+    @apply border-primary ring-4 ring-offset-0 ring-primary/25;
+  }
+
+  .input {
+    @apply px-4 py-3 bg-surface border border-surface-font/25 rounded placeholder:text-surface-font/50;
+  }
+
+  .input:focus {
+    @apply border-primary ring-4 ring-primary/25;
+  }
+
+  .file {
+    @apply bg-surface border border-surface-font/25 rounded;
+  }
+
+  .file:focus,
+  .file:focus-within {
+    @apply outline-none border-secondary ring-4 ring-secondary/25;
+  }
+
+  .file::-webkit-file-upload-button {
+    @apply btn btn-secondary border-none rounded-none cursor-pointer mr-3 focus:ring-0;
+  }
+
+  .select {
+    @apply px-4 py-3 bg-surface bg-[center_right_1rem] border border-surface-font/25 rounded invalid:text-surface-font/50;
+  }
+
+  .select:focus {
+    @apply border-primary ring-4 ring-primary/25;
+  }
+}

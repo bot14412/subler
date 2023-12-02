@@ -1,0 +1,17 @@
+@layer components {
+  .alert {
+    @apply px-4 py-3 rounded border flex items-center gap-3;
+  }
+
+  .alert-error {
+    @apply text-error bg-error/20 border-error;
+  }
+
+  .alert-warning {
+    @apply text-warning bg-warning/20 border-warning;
+  }
+
+  .alert-success {
+    @apply text-success bg-success/20 border-success;
+  }
+}

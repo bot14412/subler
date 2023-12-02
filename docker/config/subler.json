@@ -1,0 +1,10 @@
+{
+  "email": "admin@example.com",
+  "password": "password",
+  "username": "username",
+  "transmissionURL": "http://localhost:9091/transmission/rpc",
+  "downloadFolder": "/data/download",
+  "convertFolder": "/data/convert",
+  "maxBitrate": 128,
+  "maxChannels": 6
+}

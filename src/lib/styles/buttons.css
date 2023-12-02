@@ -1,0 +1,35 @@
+@layer components {
+  .btn {
+    @apply px-4 py-3 rounded outline-none focus:ring-4;
+    @apply hover:brightness-hover active:brightness-active;
+  }
+
+  .btn-icon {
+    @apply inline-flex justify-center items-center gap-2;
+  }
+
+  .btn-primary {
+    @apply text-primary-font bg-primary border border-primary focus:ring-primary/25;
+  }
+
+  .btn-secondary {
+    @apply text-secondary-font bg-secondary border border-secondary focus:ring-secondary/25;
+  }
+
+  .btn-tertiary {
+    @apply text-tertiary-font bg-tertiary border border-tertiary focus:ring-tertiary/25;
+  }
+
+  .btn-success {
+    @apply text-success-font bg-success border border-success focus:ring-success/25;
+  }
+
+  .btn-error {
+    @apply text-error-font bg-error border border-error focus:ring-error/25;
+  }
+
+  .btn:disabled,
+  .btn-disabled {
+    @apply pointer-events-none opacity-50;
+  }
+}

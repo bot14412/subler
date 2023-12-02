@@ -1,0 +1,21 @@
+@layer components {
+  .icon {
+    @apply inline-block w-6 h-6 bg-current shrink-0;
+  }
+
+  .icon-check {
+    mask: url($lib/icons/check.svg);
+  }
+
+  .icon-trash {
+    mask: url($lib/icons/trash.svg);
+  }
+
+  .icon-close {
+    mask: url($lib/icons/close.svg);
+  }
+
+  .icon-exclamation {
+    mask: url($lib/icons/exclamation.svg);
+  }
+}

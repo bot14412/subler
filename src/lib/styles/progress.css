@@ -1,0 +1,29 @@
+@layer components {
+  .progress {
+    @apply relative h-2 rounded overflow-hidden;
+  }
+
+  .progress::before {
+    @apply absolute inset-0 bg-current opacity-20 content-[''];
+  }
+
+  .progress::after {
+    @apply absolute inset-0 bg-current content-[''];
+    width: calc(var(--value, 0) * 1%);
+  }
+
+  .progress-radial {
+    @apply relative w-12 h-12 grid place-content-center text-xs font-mono;
+  }
+
+  .progress-radial::before {
+    @apply absolute inset-0 text-current opacity-20 content-[''];
+    background: radial-gradient(closest-side, transparent 78%, currentColor 82%, currentColor 96%, transparent);
+  }
+
+  .progress-radial::after {
+    @apply absolute inset-0 content-[''];
+    background: radial-gradient(closest-side, transparent 78%, currentColor 82%, currentColor 96%, transparent);
+    mask: conic-gradient(black calc(var(--value, 0) * 1%), transparent 0);
+  }
+}

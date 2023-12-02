@@ -1,0 +1,24 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+@import 'themes.css';
+@import 'layout.css';
+@import 'icons.css';
+@import 'buttons.css';
+@import 'forms.css';
+@import 'alerts.css';
+@import 'progress.css';
+
+@layer base {
+  body {
+    @apply text-surface-font bg-surface;
+  }
+
+  a {
+    @apply hover:brightness-hover;
+  }
+
+  h1 {
+    @apply text-lg font-medium;
+  }
+}
