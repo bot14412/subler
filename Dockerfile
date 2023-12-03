@@ -7,8 +7,11 @@ RUN yarn && yarn build
 
 
 FROM alpine:latest
-LABEL maintainer="Pierre A. Dardignac <p.a.dardignac@gmail.com>"
 WORKDIR /app
+
+LABEL org.opencontainers.image.source="https://github.com/bot14412/subler"
+LABEL org.opencontainers.image.description="Torrent client with media convertion"
+LABEL org.opencontainers.image.licenses="MIT"
 
 ENV USER_UID=
 ENV USER_GID=
