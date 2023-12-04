@@ -2,8 +2,8 @@ FROM alpine:latest AS build
 WORKDIR /app
 
 COPY . .
-RUN apk add --no-cache nodejs-current yarn
-RUN yarn && yarn build
+RUN apk add --no-cache nodejs-current
+RUN npm install && npm run build
 
 
 FROM alpine:latest
@@ -25,8 +25,7 @@ COPY --from=build /app/build /app/package.json .
 RUN apk add --no-cache \
     tini iptables openvpn curl jq \
     transmission-daemon transmission-cli \
-    ffmpeg mkvtoolnix \
-    nodejs-current yarn
+    ffmpeg mkvtoolnix nodejs-current
 
 HEALTHCHECK --interval=300s --start-period=600s CMD /app/check.sh
 CMD ["/sbin/tini", "--", "/app/run.sh"]
