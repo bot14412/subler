@@ -60,29 +60,14 @@ function cleanupConvertionTask(task, error) {
 async function loadMediaDetails(file) {
   const settings = await getSettings();
   const path = `${settings.downloadFolder}/${file}`;
-  const args = [
-    '-v',
-    'error',
-    '-print_format',
-    'json',
-    '-show_format',
-    '-show_streams',
-    path,
-  ];
+  const args = ['-v', 'error', '-print_format', 'json', '-show_format', '-show_streams', path];
   const content = await execFile('ffprobe', args);
   const json = JSON.parse(content);
   const duration = parseInt(json.format.duration);
 
   /** @type {Array<import('@cyann/subler').MediaStream>} */
   let streams = json.streams.map((/** @type {Record<string, any>} */ data) => {
-    const {
-      index,
-      codec_name,
-      codec_type,
-      channels,
-      disposition,
-      tags = {},
-    } = data;
+    const { index, codec_name, codec_type, channels, disposition, tags = {} } = data;
     const { language, title } = tags;
 
     /** @type {import('@cyann/subler').MediaStream} */
@@ -95,9 +80,7 @@ async function loadMediaDetails(file) {
 
     if (codec_type === 'audio') {
       const bitrate = data.bit_rate || tags.BPS || tags['BPS-eng'];
-      stream.bitrate = bitrate
-        ? Math.round(parseInt(bitrate) / 1024)
-        : undefined;
+      stream.bitrate = bitrate ? Math.round(parseInt(bitrate) / 1024) : undefined;
       stream.channels = channels;
     }
 
@@ -147,22 +130,14 @@ async function loadMediaDetails(file) {
  */
 async function startConvertionTask(task) {
   return new Promise(async (resolve) => {
-    const { downloadFolder, convertFolder, maxChannels, maxBitrate } =
-      await getSettings();
+    const { downloadFolder, convertFolder, maxChannels, maxBitrate } = await getSettings();
     const { file, mapping } = task.params;
     const path = `${downloadFolder}/${file}`;
     const output = getOutputFilename(convertFolder, file);
     const { duration, streams } = await getMediaDetails(file);
     const selectedStreams = mapping.map((index) => streams[index]);
     const args = ['-y', '-v', 'error', '-stats', '-i', path];
-    const sargs = [
-      '-map_metadata',
-      '-1',
-      '-map_chapters',
-      '-1',
-      '-default_mode',
-      'infer',
-    ];
+    const sargs = ['-map_metadata', '-1', '-map_chapters', '-1', '-default_mode', 'infer'];
 
     console.log(`Starting task ${task.id}: ${path}`);
 
@@ -184,25 +159,14 @@ async function startConvertionTask(task) {
           console.log(`Warning: unknown bitrate: ${JSON.stringify(stream)}`);
         }
 
-        if (
-          stream.codec === 'aac' &&
-          channels <= maxChannels &&
-          bpc <= maxBitrate
-        ) {
+        if (stream.codec === 'aac' && channels <= maxChannels && bpc <= maxBitrate) {
           sargs.push(`-c:${index}`, 'copy');
         } else {
           bpc = Math.min(bpc, maxBitrate);
           channels = Math.min(channels, maxChannels);
           bitrate = Math.round(channels * bpc);
 
-          sargs.push(
-            `-c:${index}`,
-            'aac',
-            `-b:${index}`,
-            `${bitrate}k`,
-            `-ac:${index}`,
-            `${channels}`
-          );
+          sargs.push(`-c:${index}`, 'aac', `-b:${index}`, `${bitrate}k`, `-ac:${index}`, `${channels}`);
 
           if (bpc >= 64) {
             sargs.push(`-aac_coder:${index}`, 'fast');
@@ -232,9 +196,7 @@ async function startConvertionTask(task) {
     await mkdir(convertFolder, { recursive: true });
     args.push(...sargs, output);
     task.process = spawn('ffmpeg', args);
-    console.log(
-      `Spawning task ${task.id}: ${task.process.spawnargs.join(' ')}`
-    );
+    console.log(`Spawning task ${task.id}: ${task.process.spawnargs.join(' ')}`);
 
     let buffer = '';
     let stderr = '';
@@ -250,9 +212,7 @@ async function startConvertionTask(task) {
           const hours = parseInt(match[1]);
           const minutes = parseInt(match[2]);
           const seconds = parseInt(match[3]);
-          task.progress = Math.ceil(
-            ((hours * 3600 + minutes * 60 + seconds) * 100) / duration
-          );
+          task.progress = Math.ceil(((hours * 3600 + minutes * 60 + seconds) * 100) / duration);
         }
 
         stderr = line;
@@ -271,9 +231,7 @@ async function startConvertionTask(task) {
 
       stderr = '';
       task.process = spawn('mkvpropedit', args);
-      console.log(
-        `Spawning task ${task.id}: ${task.process.spawnargs.join(' ')}`
-      );
+      console.log(`Spawning task ${task.id}: ${task.process.spawnargs.join(' ')}`);
 
       task.process.stderr?.on('data', (data) => {
         stderr += data.toString();
@@ -299,19 +257,7 @@ export async function getMediaDetails(file) {
 export async function getSubtitlePreview(file, index) {
   const settings = await getSettings();
   const path = `${settings.downloadFolder}/${file}`;
-  const args = [
-    '-ss',
-    '0',
-    '-i',
-    path,
-    '-to',
-    '300',
-    '-map',
-    `0:${index}`,
-    '-f',
-    'srt',
-    '-',
-  ];
+  const args = ['-ss', '0', '-i', path, '-to', '300', '-map', `0:${index}`, '-f', 'srt', '-'];
   const content = await execFile('ffmpeg', args).catch(() => {});
   const subtitles = [];
 
