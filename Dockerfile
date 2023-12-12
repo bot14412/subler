@@ -24,7 +24,7 @@ COPY docker .
 COPY --from=build /app/build /app/package.json .
 RUN apk add --no-cache \
     tini iptables openvpn curl jq \
-    transmission-daemon transmission-cli \
+    transmission-daemon transmission-remote \
     ffmpeg mkvtoolnix nodejs-current
 
 HEALTHCHECK --interval=300s --start-period=600s CMD /app/check.sh
