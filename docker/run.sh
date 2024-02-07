@@ -21,15 +21,5 @@ mknod -m 666 /dev/net/tun c 10 200
 echo "nameserver 1.1.1.1" > /etc/resolv.conf
 echo "nameserver 1.0.0.1" >> /etc/resolv.conf
 
-iptables -P INPUT DROP
-iptables -P FORWARD DROP
-iptables -P OUTPUT ACCEPT
-
-iptables -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
-iptables -A INPUT -i eth0 -p tcp --dport 3000 -j ACCEPT
-iptables -A INPUT -i tun0 -p tcp --dport 16384:65535 -j ACCEPT
-iptables -A INPUT -i tun0 -p udp --dport 16384:65535 -j ACCEPT
-iptables -A INPUT -i lo -j ACCEPT
-
 su subler -c "CONFIG_DIR=/data/config /usr/bin/node index.js &"
 exec /usr/sbin/openvpn --config /app/openvpn/config.ovpn

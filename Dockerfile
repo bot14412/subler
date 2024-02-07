@@ -17,15 +17,15 @@ ENV USER_UID=
 ENV USER_GID=
 ENV PIA_USER=
 ENV PIA_PASS=
-EXPOSE 3000
+EXPOSE 8080
 VOLUME /data
 
 COPY docker .
 COPY --from=build /app/build /app/package.json .
 RUN apk add --no-cache \
-    tini iptables openvpn curl jq \
+    tini openvpn curl jq \
     transmission-daemon transmission-remote \
-    ffmpeg mkvtoolnix nodejs-current
+    ffmpeg mkvtoolnix nodejs
 
 HEALTHCHECK --interval=300s --start-period=600s CMD /app/check.sh
 CMD ["/sbin/tini", "--", "/app/run.sh"]
