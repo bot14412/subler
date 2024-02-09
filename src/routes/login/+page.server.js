@@ -14,7 +14,7 @@ export const actions = {
     const data = await event.request.formData();
     const email = data.get('email');
 
-    if (!email || typeof email != 'string') {
+    if (!email || typeof email !== 'string') {
       return fail(400, { error: true, message: 'invalid email' });
     }
 
