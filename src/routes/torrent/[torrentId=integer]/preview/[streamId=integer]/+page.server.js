@@ -1,4 +1,3 @@
-import { filterMediaFiles } from '$lib/helpers/ffmpeg';
 import { ensureAuthenticated } from '$lib/server/authenticate';
 import { getSubtitlePreview } from '$lib/server/ffmpeg';
 

@@ -252,11 +252,13 @@ export async function getMediaDetails(file) {
 
 /**
  * @param {string} file
- * @param {number} index
+ * @param {number} streamId
  */
-export async function getSubtitlePreview(file, index) {
+export async function getSubtitlePreview(file, streamId) {
+  const { streams } = await getMediaDetails(file);
   const settings = await getSettings();
   const path = `${settings.downloadFolder}/${file}`;
+  const index = streams[streamId]?.index || 0;
   const args = ['-ss', '0', '-i', path, '-to', '300', '-map', `0:${index}`, '-f', 'srt', '-'];
   const content = await execFile('ffmpeg', args).catch(() => {});
   const subtitles = [];
