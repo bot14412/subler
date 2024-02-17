@@ -8,7 +8,6 @@ import { getTorrentStatistics } from '$lib/server/statistics';
 /** @type {import('./$types').LayoutServerLoad} */
 export async function load(event) {
   ensureAuthenticated(event);
-  event.depends('app:torrent');
 
   const id = parseInt(event.params.torrentId);
   const torrent = await getTorrent(id).catch((err) => {

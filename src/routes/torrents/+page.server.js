@@ -7,7 +7,6 @@ import { map } from '$lib/helpers/async';
 /** @type {import('./$types').PageServerLoad} */
 export async function load(event) {
   ensureAuthenticated(event);
-  event.depends('app:torrents');
 
   const torrents = await getTorrentList().catch((err) => {
     console.log(`SublerError: failed to get torrent list: ${err}`);

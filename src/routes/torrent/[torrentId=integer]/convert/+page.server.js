@@ -29,6 +29,8 @@ export async function load(event) {
 /** @type {import('./$types').Actions} */
 export const actions = {
   default: async (event) => {
+    ensureAuthenticated(event);
+
     const data = await event.request.formData();
     const mapping = data.getAll('mapping').map((value) => parseInt(value.toString()));
 

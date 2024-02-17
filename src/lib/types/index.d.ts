@@ -19,6 +19,7 @@ declare module '@cyann/subler' {
     transmissionURL: string;
     downloadFolder: string;
     convertFolder: string;
+    languages: Array<string>;
     maxBitrate: number;
     maxChannels: number;
   };

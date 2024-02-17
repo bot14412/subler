@@ -99,7 +99,7 @@ async function loadMediaDetails(file) {
     const { type: atype, lang: alang = '' } = a;
     const { type: btype, lang: blang = '' } = b;
     const types = ['video', 'audio', 'subtitle'];
-    const langs = ['eng', 'fre'];
+    const langs = settings.languages;
 
     if (atype !== btype) {
       return types.indexOf(atype) - types.indexOf(btype);

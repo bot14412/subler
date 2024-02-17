@@ -19,6 +19,8 @@ export async function load(event) {
 /** @type {import('./$types').Actions} */
 export const actions = {
   save: async (event) => {
+    ensureAuthenticated(event);
+
     const data = await event.request.formData();
     const convertFolder = data.get('convertFolder');
 
