@@ -1,6 +1,6 @@
 import { readFile } from 'fs/promises';
 import adapter from '@sveltejs/adapter-node';
-import { vitePreprocess } from '@sveltejs/kit/vite';
+import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
 const url = new URL('package.json', import.meta.url);
 const content = await readFile(url.pathname, 'utf8');

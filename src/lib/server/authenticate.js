@@ -33,7 +33,7 @@ export async function createSession(event, user) {
   const id = randomUUID();
 
   cleanupSessions();
-  event.cookies.set('session', id);
+  event.cookies.set('session', id, { path: '/' });
   sessions[id] = { user, expire: getTimestamp(SESSION_VALIDITY) };
 }
 
@@ -47,7 +47,7 @@ export async function deleteSession(event) {
 
   if (id) {
     delete sessions[id];
-    cookies.delete('session');
+    cookies.delete('session', { path: '/' });
   }
 }
 
