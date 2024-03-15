@@ -2,6 +2,11 @@ import { fail, redirect } from '@sveltejs/kit';
 import { ensureAuthenticated } from '$lib/server/authenticate';
 import { addTorrent } from '$lib/server/transmission';
 
+/** @type {import('./$types').PageServerLoad} */
+export async function load(event) {
+  ensureAuthenticated(event);
+}
+
 /** @type {import('./$types').Actions} */
 export const actions = {
   default: async (event) => {
