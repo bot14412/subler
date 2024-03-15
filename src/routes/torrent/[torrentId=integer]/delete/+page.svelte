@@ -12,7 +12,7 @@
   <h1>Delete Torrent</h1>
 
   {#if form?.error}
-    <div class="alert alert-error">
+    <div class="alert alert-warning">
       <span class="icon icon-exclamation" />
       <span>{form.message}</span>
     </div>
@@ -26,5 +26,5 @@
 
 <form class="flex justify-end gap-4" method="post" use:enhance>
   <a class="btn btn-secondary" href="/torrent/{data.torrent.id}">Cancel</a>
-  <button class="btn btn-error">Delete</button>
+  <button class="btn btn-warning">Delete</button>
 </form>

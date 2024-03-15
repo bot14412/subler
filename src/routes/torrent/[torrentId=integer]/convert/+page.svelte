@@ -25,7 +25,7 @@
   <section class="section flex flex-col gap-8 px-4 md:px-8 py-8">
     <h1>Streams</h1>
     {#if form?.error}
-      <div class="alert alert-error">
+      <div class="alert alert-warning">
         <span class="icon icon-exclamation" />
         <span>{form.message}</span>
       </div>

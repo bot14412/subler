@@ -36,10 +36,6 @@ export default {
           DEFAULT: 'rgb(var(--color-warning))',
           font: 'rgb(var(--color-warning-font))',
         },
-        error: {
-          DEFAULT: 'rgb(var(--color-error))',
-          font: 'rgb(var(--color-error-font))',
-        },
       },
       strokeWidth: {
         4: '4px',

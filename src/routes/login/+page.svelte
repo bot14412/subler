@@ -10,7 +10,7 @@
     <h1>Sign in to Subler</h1>
     <div class="flex flex-col gap-4">
       {#if form?.error}
-        <div class="alert alert-error">
+        <div class="alert alert-warning">
           <span class="icon icon-exclamation" />
           <span>{form.message}</span>
         </div>

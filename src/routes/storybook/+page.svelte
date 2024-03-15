@@ -10,8 +10,8 @@
     <button class="btn btn-success" type="button" disabled>Success disabled</button>
   </div>
   <div class="flex flex-wrap gap-4">
-    <button class="btn btn-error" type="button">Error</button>
-    <button class="btn btn-icon btn-error" type="button">
+    <button class="btn btn-warning" type="button">Error</button>
+    <button class="btn btn-icon btn-warning" type="button">
       <span class="icon icon-trash" />
       <span>Error with icon</span>
     </button>
@@ -20,10 +20,6 @@
 
 <section class="section flex flex-col gap-8 px-4 md:px-8 py-8">
   <h1>Forms</h1>
-  <div class="alert alert-error">
-    <span class="icon icon-exclamation" />
-    <span>Alert message</span>
-  </div>
   <div class="alert alert-warning">
     <span class="icon icon-exclamation" />
     <span>Warning message</span>
@@ -57,13 +53,13 @@
 <section class="section flex flex-col gap-8 px-4 md:px-8 py-8">
   <h1>Progress meters</h1>
   <div class="progress text-primary" style:--value={0} />
-  <div class="progress text-error" style:--value={20} />
+  <div class="progress text-warning" style:--value={20} />
   <div class="progress text-success" style:--value={25} />
   <div class="progress" style:--value={100} />
   <div class="flex gap-4">
     <div class="progress-radial" style:--value={90}>90%</div>
     <div class="progress-radial text-primary" style:--value={95}>95%</div>
-    <div class="progress-radial text-error" style:--value={25}>25%</div>
+    <div class="progress-radial text-warning" style:--value={25}>25%</div>
     <div class="progress-radial text-success" style:--value={90}>90%</div>
   </div>
 </section>

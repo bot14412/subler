@@ -9,7 +9,7 @@
   <section class="bg-surface-accent rounded flex flex-col gap-8 px-4 md:px-8 py-8">
     <h1>New Torrent</h1>
     {#if form?.error}
-      <div class="alert alert-error">
+      <div class="alert alert-warning">
         <span class="icon icon-exclamation" />
         <span>{form.message}</span>
       </div>

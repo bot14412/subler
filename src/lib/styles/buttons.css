@@ -24,8 +24,8 @@
     @apply text-success-font bg-success border border-success focus:ring-success/25;
   }
 
-  .btn-error {
-    @apply text-error-font bg-error border border-error focus:ring-error/25;
+  .btn-warning {
+    @apply text-warning-font bg-warning border border-warning focus:ring-warning/25;
   }
 
   .btn:disabled,

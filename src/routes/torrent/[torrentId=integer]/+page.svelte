@@ -35,5 +35,5 @@
   {:else}
     <a class="btn btn-primary" href="/torrent/{data.torrent.id}/convert">Convert</a>
   {/if}
-  <a class="btn btn-error" href="/torrent/{data.torrent.id}/delete">Delete</a>
+  <a class="btn btn-warning" href="/torrent/{data.torrent.id}/delete">Delete</a>
 </div>

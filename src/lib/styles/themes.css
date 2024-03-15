@@ -14,10 +14,8 @@
     --color-tertiary-font: 255 255 255;
     --color-success: 76 158 80;
     --color-success-font: 255 255 255;
-    --color-warning: 199 93 41;
+    --color-warning: 198 40 40;
     --color-warning-font: 255 255 255;
-    --color-error: 198 40 40;
-    --color-error-font: 255 255 255;
   }
 
   @media (prefers-color-scheme: dark) {
