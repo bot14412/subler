@@ -13,7 +13,7 @@ export async function load(event) {
     throw error(404, { message: 'failed to get torrent list' });
   });
 
-  const list = map(torrents, async (torrent) => ({
+  const list = await map(torrents, async (torrent) => ({
     statistics: await getTorrentStatistics(torrent),
     torrent,
   }));
