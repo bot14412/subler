@@ -67,7 +67,6 @@ export async function resumeSession(event) {
 
   session.expire = getTimestamp(SESSION_VALIDITY);
   event.locals.user = {
-    username: session.user.username,
     email: session.user.email,
   };
 }
@@ -96,7 +95,7 @@ export function ensureAuthenticated(event) {
 export async function getUser(email) {
   const settings = await getSettings();
   if (email === settings.email) {
-    const { password, username } = settings;
-    return { email, password, username };
+    const { password } = settings;
+    return { email, password };
   }
 }

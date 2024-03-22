@@ -9,17 +9,16 @@ declare module '@cyann/subler' {
   export type User = {
     email: string;
     password: string;
-    username: string;
   };
 
   export type Settings = {
     email: string;
     password: string;
-    username: string;
     transmissionURL: string;
     downloadFolder: string;
     convertFolder: string;
     languages: Array<string>;
+    quicktime: boolean;
     maxBitrate: number;
     maxChannels: number;
   };

@@ -23,14 +23,17 @@ export const actions = {
 
     const data = await event.request.formData();
     const convertFolder = data.get('convertFolder');
+    const quicktime = data.get('quicktime') === 'on';
 
-    if (!convertFolder || typeof convertFolder !== 'string') {
+    if (typeof convertFolder !== 'string' || !convertFolder) {
       return fail(400, { error: true, message: 'Invalid params' });
     }
 
     const settings = await getSettings();
     settings.convertFolder = convertFolder;
+    settings.quicktime = quicktime;
     setSettings(settings);
+    throw redirect(307, '/torrents');
   },
   logout: async (event) => {
     deleteSession(event);

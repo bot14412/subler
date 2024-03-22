@@ -130,7 +130,7 @@ async function loadMediaDetails(file) {
  */
 async function startConvertionTask(task) {
   return new Promise(async (resolve) => {
-    const { downloadFolder, convertFolder, maxChannels, maxBitrate } = await getSettings();
+    const { downloadFolder, convertFolder, quicktime, maxBitrate, maxChannels } = await getSettings();
     const { file, mapping } = task.params;
     const path = `${downloadFolder}/${file}`;
     const output = getOutputFilename(convertFolder, file);
@@ -143,12 +143,17 @@ async function startConvertionTask(task) {
 
     for (let index in selectedStreams) {
       const stream = selectedStreams[index];
+      const lang = quicktime && stream.lang === 'fre' ? 'fra' : stream.lang;
 
       args.push('-map', `0:${stream.index}`);
 
       if (stream.type === 'video') {
         sargs.push(`-c:${index}`, 'copy');
         sargs.push(`-map_metadata:s:${index}`, '-1');
+
+        if (quicktime && stream.name === 'hevc') {
+          sargs.push(`-tag:${index}`, 'hvc1');
+        }
       } else if (stream.type === 'audio' && stream.channels) {
         let { bitrate, channels } = stream;
         let bpc = maxBitrate;
@@ -176,19 +181,25 @@ async function startConvertionTask(task) {
         sargs.push(`-disposition:${index}`, '0');
         sargs.push(`-map_metadata:s:${index}`, '-1');
 
-        if (stream.lang) {
-          sargs.push(`-metadata:s:${index}`, `language=${stream.lang}`);
+        if (lang) {
+          sargs.push(`-metadata:s:${index}`, `language=${lang}`);
         }
       } else if (stream.type === 'subtitle') {
         const disposition = stream.forced ? 'forced' : '0';
-        const codec = stream.codec === 'mov_text' ? 'srt' : 'copy';
+        let codec = 'copy';
+
+        if (quicktime) {
+          codec = 'mov_text';
+        } else if (stream.codec === 'mov_text') {
+          codec = 'srt';
+        }
 
         sargs.push(`-c:${index}`, codec);
         sargs.push(`-disposition:${index}`, disposition);
         sargs.push(`-map_metadata:s:${index}`, '-1');
 
-        if (stream.lang) {
-          sargs.push(`-metadata:s:${index}`, `language=${stream.lang}`);
+        if (lang) {
+          sargs.push(`-metadata:s:${index}`, `language=${lang}`);
         }
       }
     }
