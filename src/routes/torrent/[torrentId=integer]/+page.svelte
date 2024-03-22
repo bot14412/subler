@@ -17,6 +17,8 @@
         <span class="flex-1 whitespace-nowrap overflow-hidden text-ellipsis">{basename(media.file)}</span>
         {#if media.status === 'finished'}
           <span class="icon icon-check w-4 h-4 text-primary" />
+        {:else if media.status === 'error'}
+          <span class="icon icon-exclamation w-4 h-4 text-warning" />
         {:else if media.progress !== undefined}
           <div class="progress text-primary w-16 sm:w-24" style:--value={media.progress} />
         {/if}
