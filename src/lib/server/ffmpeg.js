@@ -133,7 +133,7 @@ async function startConvertionTask(task) {
     const { downloadFolder, convertFolder, quicktime, maxBitrate, maxChannels } = await getSettings();
     const { file, mapping } = task.params;
     const path = `${downloadFolder}/${file}`;
-    const output = getOutputFilename(convertFolder, file);
+    const output = getOutputFilename(convertFolder, file, quicktime);
     const { duration, streams } = await getMediaDetails(file);
     const selectedStreams = mapping.map((index) => streams[index]);
     const args = ['-y', '-v', 'error', '-stats', '-i', path];
@@ -151,7 +151,7 @@ async function startConvertionTask(task) {
         sargs.push(`-c:${index}`, 'copy');
         sargs.push(`-map_metadata:s:${index}`, '-1');
 
-        if (quicktime && stream.name === 'hevc') {
+        if (quicktime && stream.codec === 'hevc') {
           sargs.push(`-tag:${index}`, 'hvc1');
         }
       } else if (stream.type === 'audio' && stream.channels) {
@@ -299,8 +299,8 @@ export async function getSubtitlePreview(file, streamId) {
 
 /** @param {string} file  */
 export async function hasConvertionFile(file) {
-  const settings = await getSettings();
-  const output = getOutputFilename(settings.convertFolder, file);
+  const { convertFolder, quicktime } = await getSettings();
+  const output = getOutputFilename(convertFolder, file, quicktime);
   return !!(await stat(output).catch(() => {}));
 }
 

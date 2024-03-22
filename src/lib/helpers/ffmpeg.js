@@ -12,8 +12,10 @@ export function filterMediaFiles(files) {
 /**
  * @param {string} folder
  * @param {string} file
+ * @param {boolean} quicktime
  */
-export function getOutputFilename(folder, file) {
+export function getOutputFilename(folder, file, quicktime) {
+  const ext = quicktime ? '.mp4' : '.mkv';
   let basename = file;
 
   // basename
@@ -74,7 +76,7 @@ export function getOutputFilename(folder, file) {
     name += ` ${episode}`;
   }
 
-  return `${folder}/${name}.mkv`;
+  return `${folder}/${name}${ext}`;
 }
 
 /** @param {import("@cyann/subler").MediaStream} stream  */
