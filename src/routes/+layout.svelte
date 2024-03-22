@@ -24,7 +24,6 @@
     </ul>
     <ul class="flex gap-3">
       {#if $page.data.user}
-        <li><a href="/storybook">Storybook</a></li>
         <li><a href="/torrents">Torrents</a></li>
         <li><a href="/settings">Settings</a></li>
       {:else}

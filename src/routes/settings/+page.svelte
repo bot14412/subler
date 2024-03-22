@@ -32,8 +32,7 @@
       </span>
     </label>
     <div class="flex items-center justify-end gap-2 sm:gap-4">
-      <a class="btn btn-secondary" href="/torrents">Back</a>
-      <button class="btn btn-primary" formaction="?/save">Save settings</button>
+      <button class="btn btn-primary" formaction="?/save">Save</button>
       <button class="btn btn-warning" formaction="?/logout">Sign out</button>
     </div>
   </form>
