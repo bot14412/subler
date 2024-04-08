@@ -10,9 +10,9 @@ bind_port() {
     if [ ${token_expiration:-0} -le $now ]; then
         user=$( head -1 /app/openvpn/credentials)
         pass=$( tail -1 /app/openvpn/credentials)
-        response=$( curl -s -u "$user:$pass" https://privateinternetaccess.com/gtoken/generateToken )
+        response=$( curl -s -L -F "username=$user" -F "password=$pass" https://www.privateinternetaccess.com/api/client/v2/token )
 
-        [ $( echo $response | jq -r .status ) = "OK" ] || { echo "Generate token failed" ; return 1 ; }
+        [ $( echo $response | jq -r .status ) = "" ] || { echo "Generate token failed" ; return 1 ; }
 
         token=$( echo $response | jq -r .token )
         token_expiration=$(( $now + 86400 ))
