@@ -3,10 +3,6 @@
 if [ -z "$( id -u subler 2> /dev/null )" ]; then
     sed -i "s/^\(users:x\):100:/\1:$USER_GID:/" /etc/group
     adduser -D -u "$USER_UID" -G users -g subler subler
-    echo "$PIA_USER" > /app/openvpn/credentials
-    echo "$PIA_PASS" >> /app/openvpn/credentials
-    chmod 600 /app/openvpn/credentials
-    chown subler:users /app/openvpn/credentials
 fi
 
 if [ ! -d /data/config ]; then

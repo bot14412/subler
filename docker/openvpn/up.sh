@@ -1,3 +1,4 @@
 #!/bin/sh
 
-su subler -c "setsid /bin/sh /app/openvpn/start.sh $route_vpn_gateway $ifconfig_local &"
+echo "Starting transmission on $ifconfig_local"
+su subler -c "/usr/bin/transmission-daemon --foreground --config-dir /data/config --peerport $PEER_PORT --bind-address-ipv4 $ifconfig_local &"
