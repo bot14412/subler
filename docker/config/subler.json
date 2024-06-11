@@ -5,7 +5,6 @@
   "downloadFolder": "/data/download",
   "convertFolder": "/data/convert",
   "languages": ["eng", "fre"],
-  "quicktime": true,
   "maxBitrate": 128,
   "maxChannels": 6
 }

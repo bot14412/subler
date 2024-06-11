@@ -38,7 +38,7 @@ async function execFile(file, args) {
 
 /**
  * @param {import('@cyann/subler').ConvertionTask} task
- * @param {string} error
+ * @param {string} [error]
  */
 function cleanupConvertionTask(task, error) {
   if (error) {
@@ -130,10 +130,10 @@ async function loadMediaDetails(file) {
  */
 async function startConvertionTask(task) {
   return new Promise(async (resolve) => {
-    const { downloadFolder, convertFolder, quicktime, maxBitrate, maxChannels } = await getSettings();
+    const { downloadFolder, convertFolder, maxBitrate, maxChannels } = await getSettings();
     const { file, mapping } = task.params;
     const path = `${downloadFolder}/${file}`;
-    const output = getOutputFilename(convertFolder, file, quicktime);
+    const output = getOutputFilename(convertFolder, file);
     const { duration, streams } = await getMediaDetails(file);
     const selectedStreams = mapping.map((index) => streams[index]);
     const args = ['-y', '-v', 'error', '-stats', '-i', path];
@@ -143,7 +143,7 @@ async function startConvertionTask(task) {
 
     for (let index in selectedStreams) {
       const stream = selectedStreams[index];
-      const lang = quicktime && stream.lang === 'fre' ? 'fra' : stream.lang;
+      const lang = stream.lang === 'fre' ? 'fra' : stream.lang;
 
       args.push('-map', `0:${stream.index}`);
 
@@ -151,7 +151,7 @@ async function startConvertionTask(task) {
         sargs.push(`-c:${index}`, 'copy');
         sargs.push(`-map_metadata:s:${index}`, '-1');
 
-        if (quicktime && stream.codec === 'hevc') {
+        if (stream.codec === 'hevc') {
           sargs.push(`-tag:${index}`, 'hvc1');
         }
       } else if (stream.type === 'audio' && stream.channels) {
@@ -186,15 +186,8 @@ async function startConvertionTask(task) {
         }
       } else if (stream.type === 'subtitle') {
         const disposition = stream.forced ? 'forced' : '0';
-        let codec = 'copy';
 
-        if (quicktime) {
-          codec = 'mov_text';
-        } else if (stream.codec === 'mov_text') {
-          codec = 'srt';
-        }
-
-        sargs.push(`-c:${index}`, codec);
+        sargs.push(`-c:${index}`, 'mov_text');
         sargs.push(`-disposition:${index}`, disposition);
         sargs.push(`-map_metadata:s:${index}`, '-1');
 
@@ -232,26 +225,9 @@ async function startConvertionTask(task) {
     });
 
     task.process.on('close', (code) => {
-      const args = [output, '--add-track-statistics-tags'];
-
-      if (code) {
-        cleanupConvertionTask(task, buffer || stderr);
-        resolve();
-        return;
-      }
-
-      stderr = '';
-      task.process = spawn('mkvpropedit', args);
-      console.log(`Spawning task ${task.id}: ${task.process.spawnargs.join(' ')}`);
-
-      task.process.stderr?.on('data', (data) => {
-        stderr += data.toString();
-      });
-
-      task.process.on('close', () => {
-        cleanupConvertionTask(task, stderr);
-        resolve();
-      });
+      const error = code ? buffer || stderr : undefined;
+      cleanupConvertionTask(task, error);
+      resolve();
     });
   });
 }
@@ -299,8 +275,8 @@ export async function getSubtitlePreview(file, streamId) {
 
 /** @param {string} file  */
 export async function hasConvertionFile(file) {
-  const { convertFolder, quicktime } = await getSettings();
-  const output = getOutputFilename(convertFolder, file, quicktime);
+  const { convertFolder } = await getSettings();
+  const output = getOutputFilename(convertFolder, file);
   return !!(await stat(output).catch(() => {}));
 }
 

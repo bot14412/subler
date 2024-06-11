@@ -18,7 +18,6 @@ declare module '@cyann/subler' {
     downloadFolder: string;
     convertFolder: string;
     languages: Array<string>;
-    quicktime: boolean;
     maxBitrate: number;
     maxChannels: number;
   };

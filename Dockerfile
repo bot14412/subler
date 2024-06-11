@@ -17,10 +17,8 @@ VOLUME /data
 
 COPY docker .
 COPY --from=build /app/build /app/package.json .
-RUN apk add --no-cache \
-    tini openvpn curl jq \
-    transmission-daemon transmission-remote \
-    ffmpeg mkvtoolnix nodejs
+RUN apk add --no-cache tini openvpn curl jq \
+    transmission-daemon ffmpeg nodejs
 
 HEALTHCHECK --interval=300s --start-period=600s CMD /app/check.sh
 CMD ["/sbin/tini", "--", "/app/run.sh"]

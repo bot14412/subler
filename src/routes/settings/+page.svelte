@@ -25,12 +25,6 @@
       <span class="flex-1">Conversion folder</span>
       <input class="input w-80" type="text" name="convertFolder" value={data.settings.convertFolder} />
     </label>
-    <label class="flex items-center gap-4">
-      <span class="flex-1">QuickTime compatibility</span>
-      <span class="flex w-80">
-        <input class="checkbox" type="checkbox" name="quicktime" checked={data.settings.quicktime} />
-      </span>
-    </label>
     <div class="flex items-center justify-end gap-2 sm:gap-4">
       <button class="btn btn-primary" formaction="?/save">Save</button>
       <button class="btn btn-warning" formaction="?/logout">Sign out</button>
