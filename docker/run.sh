@@ -18,4 +18,4 @@ echo "nameserver 1.1.1.1" > /etc/resolv.conf
 echo "nameserver 1.0.0.1" >> /etc/resolv.conf
 
 su subler -c "HOST=$( hostname -i ) PORT=8080 CONFIG_DIR=/data/config BODY_SIZE_LIMIT=4194304 /usr/bin/node index.js &"
-exec /usr/sbin/openvpn --config /app/openvpn/config.ovpn
+exec /usr/sbin/openvpn --setenv peer_port $PEER_PORT --config /app/openvpn/config.ovpn
