@@ -137,7 +137,7 @@ async function startConvertionTask(task) {
     const { duration, streams } = await getMediaDetails(file);
     const selectedStreams = mapping.map((index) => streams[index]);
     const args = ['-y', '-v', 'error', '-stats', '-i', path];
-    const sargs = ['-map_metadata', '-1', '-map_chapters', '-1', '-default_mode', 'infer'];
+    const sargs = ['-map_metadata', '-1', '-map_chapters', '-1', '-default_mode', 'infer', '-movflags', 'faststart'];
 
     console.log(`Starting task ${task.id}: ${path}`);
 
