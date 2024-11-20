@@ -16,11 +16,11 @@
       <div class="px-4 py-3 sm:rounded odd:bg-secondary/10 flex items-center gap-2">
         <span class="flex-1 whitespace-nowrap overflow-hidden text-ellipsis">{basename(media.file)}</span>
         {#if media.status === 'finished'}
-          <span class="icon icon-check w-4 h-4 text-primary" />
+          <span class="icon icon-check w-4 h-4 text-primary"></span>
         {:else if media.status === 'error'}
-          <span class="icon icon-exclamation w-4 h-4 text-warning" />
+          <span class="icon icon-exclamation w-4 h-4 text-warning"></span>
         {:else if media.progress !== undefined}
-          <div class="progress text-primary w-16 sm:w-24" style:--value={media.progress} />
+          <div class="progress text-primary w-16 sm:w-24" style:--value={media.progress}></div>
         {/if}
       </div>
     {:else}

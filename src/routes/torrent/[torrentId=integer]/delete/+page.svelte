@@ -13,7 +13,7 @@
 
   {#if form?.error}
     <div class="alert alert-warning">
-      <span class="icon icon-exclamation" />
+      <span class="icon icon-exclamation"></span>
       <span>{form.message}</span>
     </div>
   {/if}

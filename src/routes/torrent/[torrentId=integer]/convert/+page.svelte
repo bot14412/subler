@@ -26,13 +26,13 @@
     <h1>Streams</h1>
     {#if form?.error}
       <div class="alert alert-warning">
-        <span class="icon icon-exclamation" />
+        <span class="icon icon-exclamation"></span>
         <span>{form.message}</span>
       </div>
     {/if}
     {#if data.convertionWarning}
       <div class="alert alert-warning">
-        <span class="icon icon-exclamation" />
+        <span class="icon icon-exclamation"></span>
         <span>Starting a new convertion will overwrite existing files.</span>
       </div>
     {/if}

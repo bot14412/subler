@@ -20,7 +20,7 @@
   <div class="flex flex-wrap gap-4">
     <button class="btn btn-warning" type="button">Error</button>
     <button class="btn btn-icon btn-warning" type="button">
-      <span class="icon icon-trash" />
+      <span class="icon icon-trash"></span>
       <span>Error with icon</span>
     </button>
   </div>
@@ -29,11 +29,11 @@
 <section class="section flex flex-col gap-8 px-4 md:px-8 py-8">
   <h1>Forms</h1>
   <div class="alert alert-warning">
-    <span class="icon icon-exclamation" />
+    <span class="icon icon-exclamation"></span>
     <span>Warning message</span>
   </div>
   <div class="alert alert-success">
-    <span class="icon icon-check" />
+    <span class="icon icon-check"></span>
     <span>Success message</span>
   </div>
   <form class="flex flex-col gap-6">
@@ -60,10 +60,10 @@
 
 <section class="section flex flex-col gap-8 px-4 md:px-8 py-8">
   <h1>Progress meters</h1>
-  <div class="progress text-primary" style:--value={0} />
-  <div class="progress text-warning" style:--value={20} />
-  <div class="progress text-success" style:--value={25} />
-  <div class="progress" style:--value={100} />
+  <div class="progress text-primary" style:--value={0}></div>
+  <div class="progress text-warning" style:--value={20}></div>
+  <div class="progress text-success" style:--value={25}></div>
+  <div class="progress" style:--value={100}></div>
   <div class="flex gap-4">
     <div class="progress-radial" style:--value={90}>90%</div>
     <div class="progress-radial text-primary" style:--value={95}>95%</div>
