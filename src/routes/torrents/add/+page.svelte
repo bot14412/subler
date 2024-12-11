@@ -5,7 +5,7 @@
   export let form;
 </script>
 
-<form method="post" use:enhance>
+<form method="post" enctype="multipart/form-data" use:enhance>
   <section class="bg-surface-accent rounded flex flex-col gap-8 px-4 md:px-8 py-8">
     <h1>New Torrent</h1>
     {#if form?.error}
